@@ -1,6 +1,6 @@
 // Run the following two npm installs to get all the requirements set up
 // npm install --global gulp-cli
-// npm install --save-dev gulp gulp-pug node-sass gulp-sass gulp-clean-css gulp-autoprefixer gulp-postcss gulp-babel @babel/core @babel/preset-env gulp-uglify
+// npm install --save-dev gulp gulp-pug node-sass gulp-sass gulp-autoprefixer gulp-babel @babel/core @babel/preset-env gulp-uglify
 
 // You can configure the following variables to your liking
 var sourceDir = 'src/';
@@ -13,9 +13,9 @@ var jsGlob = `${sourceDir}**.js`;
 const { series, parallel, src, dest } = require('gulp');
 const pug = require('gulp-pug');
 const sass = require('gulp-sass');
-//const autoprefixer = require('gulp-autoprefixer');
-const cleanCSS = require('gulp-clean-css')
+const autoprefixer = require('gulp-autoprefixer');
 const babel = require('gulp-babel');
+const uglify = require('gulp-uglify');
 
 sass.compiler = require('node-sass');
 
@@ -28,36 +28,33 @@ function compilePugToHtml() {
 }
 
 function compileSassToCSS() {
-    console.log(this)
-
     return src('src/**.scss')
-        .pipe(sass().on('error', sass.logError))
+        .pipe(sass({
+            // Sass options
+            outputStyle: 'compressed'
+        }).on('error', sass.logError))
+        .pipe(autoprefixer({
+            // Autoprefixer options
+        }))
         .pipe(dest(destDir + 'css/'));
 }
 
 function compileJavascript() {
     return src(jsGlob)
-        //.pipe()
+        .pipe(babel({
+            presets: ['@babel/env']
+        }))
+        .pipe(uglify())
         .pipe(dest(destDir + 'js/'))
 }
 
-function prefixCSS() {
-    return src(sourceDir + '**.scss')
-        .pipe(cleanCSS({compatibility: '*', debug: true}) //autoprefixer({
-            // Autoprefixer options
-        /*})*/)
-        .pipe(dest(destDir + 'css/test'));
-}
-
 function watch() {
+    // TODO a livereload without requiring an extension, and fixing the watch in general
     watch(pugGlob, compilePugToHtml);
     watch(sassGlob, compileSassToCSS);
     watch(jsGlob, compileJavascript);
 }
 
 
-// Compile gets it working, without worrying about optimization/minimizing.
 exports.compile = parallel(compilePugToHtml, compileSassToCSS, compileJavascript)
-// Optimize does the same as compiling, but includes optimizations and minimizing
-exports.optimize = series(exports.compile, prefixCSS)
 exports.default = series(exports.compile);
