@@ -6,8 +6,8 @@
 var sourceDir = 'src/';
 var destDir = 'docs/';
 var pugGlob = `${sourceDir}**.pug`;
-var sassGlob = `${sourceDir}**.scss`;
-var jsGlob = `${sourceDir}**.js`;
+var sassGlob = [`${sourceDir}**.scss`, `!${sourceDir}/**/vendor/**`];
+var jsGlob = [`${sourceDir}**/*.js`, `!${sourceDir}/**/vendor/**`];
 
 // The following is the actual gulpfile code:
 const { series, parallel, src, dest, watch } = require('gulp');
@@ -31,7 +31,7 @@ function compilePugToHtml() {
 }
 
 function compileSassToCSS() {
-    return src('src/**.scss')
+    return src(sassGlob)
         .pipe(sass({
             // Sass options
             outputStyle: 'compressed'
