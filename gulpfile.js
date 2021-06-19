@@ -1,6 +1,6 @@
 // Run the following two npm installs to get all the requirements set up
 // npm install --global gulp-cli
-// npm install --save-dev gulp gulp-pug node-sass gulp-sass gulp-autoprefixer gulp-babel @babel/core @babel/preset-env gulp-uglify browser-sync
+// npm install --save-dev gulp gulp-pug node-sass gulp-sass gulp-autoprefixer gulp-babel @babel/core @babel/preset-env gulp-uglify browser-sync gulp-plumber
 
 // You can configure the following variables to your liking
 var sourceDir = 'src/';
@@ -17,11 +17,13 @@ const autoprefixer = require('gulp-autoprefixer');
 const babel = require('gulp-babel');
 const uglify = require('gulp-uglify');
 const browserSync = require('browser-sync').create();
+const plumber = require('gulp-plumber');
 
 sass.compiler = require('node-sass');
 
 function compilePugToHtml() {
     return src(pugGlob)
+        .pipe(plumber())
         .pipe(pug({
             // Pug options 
         }))
