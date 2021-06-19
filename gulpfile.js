@@ -52,6 +52,12 @@ function compileJavascript() {
 }
 
 
+function vendor() {
+    return src(sourceDir + '**/vendor/**')
+        .pipe(dest(destDir));
+}
+
+
 function reloadPug(cb) {
     compilePugToHtml();
     browserSync.reload();
@@ -77,5 +83,5 @@ function watchForChanges(cb) {
     cb();
 }
 
-exports.compile = parallel(compilePugToHtml, compileSassToCSS, compileJavascript);
+exports.compile = parallel(compilePugToHtml, compileSassToCSS, compileJavascript, vendor);
 exports.default = series(exports.compile, watchForChanges);
