@@ -15,9 +15,19 @@ $('.value')
 
 $('.config')
     .focusout((e) => {
+        // Closest can fire on parents as well as self, neat
         var configElement = $(e.target);
         configElement.hide();
 
         var valueElement = configElement.prev('.value');
-        valueElement.text(configElement.val()).show();
+        var configValue = configElement.val();
+
+        if (e.target.className.includes('tag')) {
+            configElement.parent('div').hide();
+            configValue = configElement.closest('tags').value;
+        }
+
+
+        valueElement.text(configElement.val()).show(); 
+        
     });

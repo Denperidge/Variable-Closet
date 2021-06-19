@@ -1,1 +1,0 @@
-"use strict";$(".value").click(function(t){var e=$(t.target);e.hide();t=e.text();console.log(t),""==t&&(t="..."),e.next(".config").show().val(t)}),$(".config").focusout(function(t){t=$(t.target);t.hide(),t.prev(".value").text(t.val()).show()});

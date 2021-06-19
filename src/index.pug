@@ -1,3 +1,5 @@
+- var defaultPronouns = ["he/him", "she/her", "they/them"];
+
 doctype html
 
 html(lang="en")
@@ -5,7 +7,9 @@ html(lang="en")
         meta(charset="UTF-8")
         meta(name="viewport" content="width=device-width, initial-scale=1.0")
         title Variable Closet
+        link(rel="stylesheet", href="css/vendor/tagify.css")
         link(rel="stylesheet", href="css/stylesheet.css")
+
         //script(src="https://unpkg.com/vue@next")
     body
         main 
@@ -22,15 +26,29 @@ html(lang="en")
                 span.value ...orientation
                 input(type="text", name="orientation").config
 
+                br
+                br
+
+                //span.value ...Pronouns
+                //div.config
+                    input(type="", id="pronouns", name="pronouns").pronouns
+                
+                input(type="", id="pronouns", name="pronouns").pronouns
+
             section#dead
                 h2 I'm still closeted with:
+
+                h3 Refer to me as:
                     input(type="text", name="deadname")
                     datalist(name="deadpronouns")
 
                         option
         
         script(src="js/vendor/jquery-3.6.0.min.js")
-        script(src="js/input.js")            
+        script(src="js/vendor/jQuery.tagify.min.js")
+        script(src="js/vendor/tagify.polyfills.min.js")
+        script(src="js/input.js")
+        script(src="js/tags.js")
 
             
 
