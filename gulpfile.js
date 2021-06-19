@@ -23,7 +23,7 @@ sass.compiler = require('node-sass');
 function compilePugToHtml() {
     return src(pugGlob)
         .pipe(pug({
-           // Pug options 
+            // Pug options 
         }))
         .pipe(dest(destDir));
 }
@@ -49,16 +49,15 @@ function compileJavascript() {
         .pipe(dest(destDir + 'js/'))
 }
 
+
 function reloadPug(cb) {
     compilePugToHtml();
     browserSync.reload();
     cb();
 }
-
 function reloadCSS() {
     return compileSassToCSS().pipe(browserSync.stream());
 }
-
 function reloadJS(cb) {
     compileJavascript();
     browserSync.reload();
@@ -77,6 +76,5 @@ function watchForChanges(cb) {
     cb();
 }
 
-
-exports.compile = parallel(compilePugToHtml, compileSassToCSS, compileJavascript)
+exports.compile = parallel(compilePugToHtml, compileSassToCSS, compileJavascript);
 exports.default = series(exports.compile, watchForChanges);
