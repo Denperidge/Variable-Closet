@@ -69,7 +69,6 @@ function watchForChanges(cb) {
     browserSync.init({
         server: destDir
     });
-    // TODO a livereload without requiring an extension, and fixing the watch in general
     watch(pugGlob, reloadPug);
     watch(sassGlob, reloadCSS);
     watch(jsGlob, reloadJS);
