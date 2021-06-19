@@ -1,6 +1,6 @@
 // Run the following two npm installs to get all the requirements set up
 // npm install --global gulp-cli
-// npm install --save-dev gulp gulp-pug node-sass gulp-sass gulp-autoprefixer gulp-babel @babel/core @babel/preset-env gulp-uglify
+// npm install --save-dev gulp gulp-pug node-sass gulp-sass gulp-autoprefixer gulp-babel @babel/core @babel/preset-env gulp-uglify browser-sync
 
 // You can configure the following variables to your liking
 var sourceDir = 'src/';
@@ -10,12 +10,13 @@ var sassGlob = `${sourceDir}**.scss`;
 var jsGlob = `${sourceDir}**.js`;
 
 // The following is the actual gulpfile code:
-const { series, parallel, src, dest } = require('gulp');
+const { series, parallel, src, dest, watch } = require('gulp');
 const pug = require('gulp-pug');
 const sass = require('gulp-sass');
 const autoprefixer = require('gulp-autoprefixer');
 const babel = require('gulp-babel');
 const uglify = require('gulp-uglify');
+const browserSync = require('browser-sync').create();
 
 sass.compiler = require('node-sass');
 
@@ -48,13 +49,34 @@ function compileJavascript() {
         .pipe(dest(destDir + 'js/'))
 }
 
-function watch() {
+function reloadPug(cb) {
+    compilePugToHtml();
+    browserSync.reload();
+    cb();
+}
+
+function reloadCSS() {
+    return compileSassToCSS().pipe(browserSync.stream());
+}
+
+function reloadJS(cb) {
+    compileJavascript();
+    browserSync.reload();
+    cb();
+}
+
+
+function watchForChanges(cb) {
+    browserSync.init({
+        server: destDir
+    });
     // TODO a livereload without requiring an extension, and fixing the watch in general
-    watch(pugGlob, compilePugToHtml);
-    watch(sassGlob, compileSassToCSS);
-    watch(jsGlob, compileJavascript);
+    watch(pugGlob, reloadPug);
+    watch(sassGlob, reloadCSS);
+    watch(jsGlob, reloadJS);
+    cb();
 }
 
 
 exports.compile = parallel(compilePugToHtml, compileSassToCSS, compileJavascript)
-exports.default = series(exports.compile);
+exports.default = series(exports.compile, watchForChanges);
