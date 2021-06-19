@@ -8,6 +8,7 @@ var destDir = 'docs/';
 var pugGlob = `${sourceDir}**.pug`;
 var sassGlob = [`${sourceDir}**.scss`, `!${sourceDir}/**/vendor/**`];
 var jsGlob = [`${sourceDir}**/*.js`, `!${sourceDir}/**/vendor/**`];
+var vendorGlob = `${sourceDir}**/vendor/**`;
 
 // The following is the actual gulpfile code:
 const { series, parallel, src, dest, watch } = require('gulp');
@@ -53,7 +54,7 @@ function compileJavascript() {
 
 
 function vendor() {
-    return src(sourceDir + '**/vendor/**')
+    return src(vendorGlob)
         .pipe(dest(destDir));
 }
 
@@ -80,6 +81,7 @@ function watchForChanges(cb) {
     watch(pugGlob, reloadPug);
     watch(sassGlob, reloadCSS);
     watch(jsGlob, reloadJS);
+    watch(vendorGlob, vendor);
     cb();
 }
 
