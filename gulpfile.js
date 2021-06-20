@@ -5,8 +5,8 @@
 // You can configure the following variables to your liking
 var sourceDir = 'src/';
 var destDir = 'docs/';
-var pugGlob = `${sourceDir}**.pug`;
-var sassGlob = [`${sourceDir}**.scss`, `!${sourceDir}/**/vendor/**`];
+var pugGlob = `${sourceDir}**/*.pug`;
+var sassGlob = [`${sourceDir}**/*.scss`, `!${sourceDir}/**/vendor/**`];
 var jsGlob = [`${sourceDir}**/*.js`, `!${sourceDir}/**/vendor/**`];
 var vendorGlob = `${sourceDir}**/vendor/**`;
 
