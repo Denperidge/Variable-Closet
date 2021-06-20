@@ -7,7 +7,7 @@ $('.value')
         var text = valueElement.text();
         console.log(text);
         if (text == "") text = "...";
-    
+
         var configElement = valueElement.next(".config").show();
         configElement.val(text);
     });
@@ -27,7 +27,10 @@ $('.config')
             configValue = configElement.closest('tags').value;
         }
 
+        console.log(configValue);
+        if (configValue == "") configValue = "...";
 
-        valueElement.text(configElement.val()).show(); 
-        
+
+        valueElement.text(configValue).show();
+
     });
