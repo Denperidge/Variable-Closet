@@ -1,0 +1,36 @@
+{
+  "name": "variable-closet",
+  "version": "1.0.0",
+  "description": "A LGBTQIA+ greeting card!",
+  "main": "gulpfile.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@babel/core": "^7.14.6",
+    "@babel/preset-env": "^7.14.5",
+    "browser-sync": "^2.26.14",
+    "gulp": "^4.0.2",
+    "gulp-autoprefixer": "^8.0.0",
+    "gulp-babel": "^8.0.0",
+    "gulp-plumber": "^1.2.1",
+    "gulp-pug": "^5.0.0",
+    "gulp-sass": "^4.1.0",
+    "gulp-uglify": "^3.0.2",
+    "node-sass": "^6.0.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Denperidge/Variable-Closet.git"
+  },
+  "author": "Denperidge",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Denperidge/Variable-Closet/issues"
+  },
+  "homepage": "https://github.com/Denperidge/Variable-Closet#readme"
+}
