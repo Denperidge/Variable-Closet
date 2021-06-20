@@ -1,0 +1,33 @@
+mixin info(textH1, textH2, prefix)
+
+
+    h1= textH1
+        | 
+        span.value ...
+        input(
+            type="text", 
+            name= prefix+"name", 
+            placeholder="Name").config
+        
+    h2= textH2
+        span.value ...identity
+        input(
+            type="text", 
+            name= prefix+"identity"
+            ).config
+        
+        span &nbsp;&nbsp;
+
+        span.value ...orientation
+        input(
+            type="text", 
+            name= prefix+"orientation"
+            ).config
+
+        br
+        br
+
+        input(
+            type="", 
+            id= prefix+"pronouns", 
+            name="pronouns").pronouns

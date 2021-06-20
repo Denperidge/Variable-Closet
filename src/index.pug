@@ -2,6 +2,8 @@
 
 doctype html
 
+include pug/info.pug
+
 html(lang="en")
     head
         meta(charset="UTF-8")
@@ -12,37 +14,16 @@ html(lang="en")
 
         //script(src="https://unpkg.com/vue@next")
     body
-        main 
-            h1 Hi, my name is 
-                span.value ...
-                input(type="text", name="name", placeholder="Name").config
-                
-            h2 And I'm a 
-                span.value ...identity
-                input(type="text", name="identity").config
-
-                span &nbsp;&nbsp;
-
-                span.value ...orientation
-                input(type="text", name="orientation").config
-
-                br
-                br
-
-                //span.value ...Pronouns
-                //div.config
-                    input(type="", id="pronouns", name="pronouns").pronouns
-                
-                input(type="", id="pronouns", name="pronouns").pronouns
+        main
+            +info("Hi, my name is", "And I'm a ", "")
+            
+            hr
 
             section#dead
-                h2 I'm still closeted with:
+                h2 I'm still closeted with: 
+                textarea
 
-                h3 Refer to me as:
-                    input(type="text", name="deadname")
-                    datalist(name="deadpronouns")
-
-                        option
+                +info("Refer to me as", "And as if I was... ", "dead")
         
         script(src="js/vendor/jquery-3.6.0.min.js")
         script(src="js/vendor/jQuery.tagify.min.js")
