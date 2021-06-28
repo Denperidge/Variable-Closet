@@ -3,24 +3,24 @@ mixin info(textH1, textH2, prefix)
 
     h1= textH1
         | 
-        span.value ...
+        span.value(id=prefix+"name") ...
         input(
-            type="text", 
+            type= "text", 
             name= prefix+"name", 
             placeholder="Name").config
         
     h2= textH2
-        span.value ...identity
+        span.value(id=prefix+"identity") ...identity
         input(
-            type="text", 
+            type= "text", 
             name= prefix+"identity"
             ).config
         
         span &nbsp;&nbsp;
 
-        span.value ...orientation
+        span.value(id=prefix+"orientation") ...orientation
         input(
-            type="text", 
+            type= "text", 
             name= prefix+"orientation"
             ).config
 

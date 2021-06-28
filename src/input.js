@@ -1,4 +1,6 @@
-// Hide value and set its value into the ocnfig
+var data = {};
+
+// Hide value and set its value into the config
 $('.value')
     .click((e) => {
         var valueElement = $(e.target);
@@ -13,7 +15,9 @@ $('.value')
     });
 
 
+// Visualize changes entered by the user
 $('.config')
+// TODO https://stackoverflow.com/a/56777426
     .focusout((e) => {
         // Closest can fire on parents as well as self, neat
         var configElement = $(e.target);
@@ -33,4 +37,7 @@ $('.config')
 
         valueElement.text(configValue).show();
 
+        // Set universal data
+        data[valueElement.attr('id')] = configValue;
+        console.log(data)
     });
